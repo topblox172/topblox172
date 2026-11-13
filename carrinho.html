@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Bloxx | Carrinho</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        roxo: '#9D4EDD',
+                        verde: '#28C76F',
+                        vermelho: '#EA5455',
+                        preto: '#000000',
+                        card_bg: '#121214',
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .conteudo {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 1rem;
+            }
+            .borda-roxa {
+                border: 2px solid #9D4EDD;
+            }
+            .botao-roxo {
+                background: linear-gradient(90deg, #9D4EDD 0%, #5A32C7 100%);
+            }
+            /* BOTÕES DENTRO DO QUADRADO AGORA */
+            .quadrado-produto {
+                height: 200px;
+                max-height: 200px;
+                overflow: hidden;
+            }
+            .texto-produto {
+                line-height: 1.1;
+                font-size: 1.4rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-preto text-white font-sans min-h-screen">
+
+<header class="py-6 border-b border-roxo/30">
+    <div class="conteudo flex items-center gap-3">
+        <i class="fa fa-shopping-cart text-roxo text-3xl"></i>
+        <h1 class="text-roxo text-3xl font-bold">CARRINHO</h1>
+    </div>
+</header>
+
+<main class="conteudo py-8">
+    <div id="produtoCarrinho" class="borda-roxa rounded-xl p-4 mb-6 flex gap-4 bg-card_bg quadrado-produto">
+        <img id="imagemProduto" src="" alt="Produto" class="w-[45%] h-[180px] rounded-lg object-cover">
+        <div class="flex-1 flex flex-col justify-center">
+            <h2 id="nomeProduto" class="text-roxo font-bold mb-2 texto-produto"></h2>
+            <p id="precoUnitario" class="text-verde text-2xl font-bold mb-3"></p>
+            <div class="flex items-center gap-3">
+                <button onclick="diminuirQtd()" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center text-2xl font-bold">-</button>
+                <span id="quantidade" class="text-xl font-bold">1</span>
+                <button onclick="aumentarQtd()" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center text-2xl font-bold">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="borda-roxa rounded-xl p-6 bg-card_bg">
+        <div class="mb-6">
+            <h3 class="text-roxo text-2xl font-bold mb-3">Valor Total</h3>
+            <p id="valorTotal" class="text-verde text-4xl font-bold">R$ 0,00</p>
+        </div>
+
+        <div id="avisoEstoque" class="bg-vermelho/10 text-vermelho font-bold text-center py-4 rounded-lg mb-6 text-xl hidden">
+            ❌ ESTE PRODUTO ESTÁ SEM ESTOQUE NO MOMENTO!
+        </div>
+
+        <button onclick="verificarEstoque()" class="botao-roxo w-full text-white text-2xl font-bold py-4 rounded-lg transition hover:opacity-90">
+            FINALIZAR COMPRA
+        </button>
+    </div>
+</main>
+
+<script>
+const produto = JSON.parse(localStorage.getItem('produtoCarrinho') || 'null');
+let quantidade = 1;
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (!produto) {
+        document.querySelector('main').innerHTML = '<p class="text-center text-gray-400 mt-20 text-xl">Seu carrinho está vazio</p>';
+        return;
+    }
+
+    // AGORA O NOME ESTÁ EXATO: blox-frutas.png
+    document.getElementById('imagemProduto').src = produto.imagem;
+
+    document.getElementById('nomeProduto').textContent = produto.nome;
+    document.getElementById('precoUnitario').textContent = `R$ ${produto.preco.toFixed(2).replace('.', ',')}`;
+    atualizarTotal();
+});
+
+function aumentarQtd() {
+    quantidade++;
+    document.getElementById('quantidade').textContent = quantidade;
+    atualizarTotal();
+}
+
+function diminuirQtd() {
+    if (quantidade > 1) {
+        quantidade--;
+        document.getElementById('quantidade').textContent = quantidade;
+        atualizarTotal();
+    }
+}
+
+function atualizarTotal() {
+    const total = produto.preco * quantidade;
+    document.getElementById('valorTotal').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+}
+
+function verificarEstoque() {
+    if (produto.estoque <= 0) {
+        document.getElementById('avisoEstoque').classList.remove('hidden');
+    } else {
+        localStorage.setItem('quantidadeComprada', quantidade);
+        window.location.href = 'pagamento.html';
+    }
+}
+</script>
+
+</body>
+</html>

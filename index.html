@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Bloxx</title>
+    <style>
+        * {margin:0; padding:0; box-sizing:border-box; font-family:Arial}
+        body {background:#f0f8ff}
+        header {background:#0091ff; padding:15px 20px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 8px #00000022}
+        .menu {color:white; font-size:24px}
+        .logo {color:white; font-size:32px; font-weight:bold}
+        .carrinho {color:white; font-size:24px}
+        .pesquisa {padding:15px 20px}
+        
+        .pesquisa input {width:100%; padding:12px 20px; border-radius:25px; border:none; font-size:16px; box-shadow:0 2px 6px #00000015}
+        .titulo {text-align:center; margin:10px 20px 25px; padding:10px; border:2px solid #0091ff; border-radius:25px; color:#0091ff; font-weight:bold; background:white}
+        .jogos {padding:0 20px; display:flex; flex-direction:column; gap:20px}
+        
+        .card {border-radius:12px; overflow:hidden; box-shadow:0 3px 10px #00000020; cursor:pointer; height:180px; background:#e6f2ff; position:relative}
+        
+        .card:nth-child(1) {background:none}
+        .card:nth-child(1) img {width:100%; height:100%; object-fit:cover; display:block}
+        
+        .card .texto-catalogo {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%, -50%);
+            color:white;
+            font-size:22px;
+            font-weight:bold;
+            text-shadow:2px 2px 6px #000000;
+            z-index:2;
+            text-align:center;
+        }
+        .card img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+            object-position:center;
+            opacity:0.85;
+        }
+        .suporte {position:fixed; bottom:20px; right:20px; width:55px; height:55px; background:#0091ff; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 3px 8px #00000030}
+        footer {text-align:center; padding:20px; color:#666; font-size:14px}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="menu">☰</div>
+    <div class="logo">TOP BLOXX</div>
+    <div class="carrinho">🛒</div>
+</header>
+
+<div class="pesquisa">
+    <input type="text" placeholder="🔍 Buscar produto...">
+</div>
+
+<div class="titulo">🎮 JOGOS DISPONÍVEIS</div>
+
+<div class="jogos">
+    <!-- Blox Fruits -->
+    <div class="card" onclick="window.location.href='blox-fruits.html'">
+        <div class="texto-catalogo"></div>
+        <img src="blox-fruits.png" alt="Catálogo Blox Fruits">
+    </div>
+
+    <!-- Roube um Brainrot -->
+    <div class="card" onclick="window.location.href='steal-brainrot.html'">
+        <div class="texto-catalogo"></div>
+        <img src="brainrot-roube.png" alt="Catálogo Roube um Brainrot">
+    </div>
+
+    <!-- Fuja do Tsunami -->
+    <div class="card" onclick="window.location.href='fuja-tsunami.html'">
+        <div class="texto-catalogo"></div>
+        <img src="fuja-tsunami.png" alt="Catálogo Fuja do Tsunami">
+    </div>
+
+    <!-- Outra categoria exemplo -->
+    <div class="card" onclick="window.location.href='outro-jogo.html'">
+        <div class="texto-catalogo"></div>
+        <img src="outro-jogo.png" alt="Catálogo Outro Jogo">
+    </div>
+</div>
+
+<div class="suporte">💬</div>
+
+<footer>© 2026 Top Bloxx - Todos os direitos reservados</footer>
+
+</body>
+</html>

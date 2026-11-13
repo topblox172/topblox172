@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Bloxx | Contas Blox Fruits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#6D28D9',
+                        escuro: '#121214',
+                        card: '#1E1E20',
+                        verde: '#10B981',
+                        vermelho: '#EF4444',
+                        amarelo: '#F59E0B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .conteudo {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 1rem;
+            }
+            .rolagem {
+                scrollbar-width: thin;
+                scrollbar-color: #6D28D9 #1E1E20;
+            }
+            .rolagem::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+            .rolagem::-webkit-scrollbar-track {
+                background: #1E1E20;
+            }
+            .rolagem::-webkit-scrollbar-thumb {
+                background-color: #6D28D9;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-escuro text-white min-h-screen flex flex-col">
+
+<!-- Cabeçalho -->
+<header class="bg-card/80 backdrop-blur-sm sticky top-0 z-50 border-b border-principal/20">
+    <div class="conteudo py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <button onclick="voltarInicio()" class="bg-principal/20 hover:bg-principal/40 transition px-3 py-1.5 rounded-lg text-sm flex items-center gap-1 cursor-pointer">
+                <i class="fa fa-arrow-left"></i> Voltar
+            </button>
+            <img src="top-blox.png" alt="Logo" class="w-12 h-12 rounded-lg">
+            <div>
+                <h1 class="font-bold text-lg">Top Bloxx</h1>
+                <p class="text-sm text-gray-400">Contas de Blox Fruits</p>
+            </div>
+        </div>
+
+        <div class="hidden md:flex items-center gap-4">
+            <div class="relative">
+                <input type="text" id="buscarProduto" placeholder="Pesquisar contas..." class="bg-escuro border border-gray-700 rounded-full py-2 px-4 pl-10 w-64 focus:outline-none focus:border-principal transition">
+                <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+            <button class="text-white hover:text-principal transition cursor-pointer text-xl"><i class="fa fa-headphones"></i></button>
+            <button onclick="irParaCarrinho()" class="text-white hover:text-principal transition relative cursor-pointer text-xl">
+                <i class="fa fa-shopping-bag"></i>
+                <span id="qtdCarrinho" class="absolute -top-2 -right-2 bg-vermelho text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+            </button>
+            <!-- BOTÃO ENTRAR REMOVIDO AQUI -->
+        </div>
+
+        <div class="flex md:hidden items-center gap-3">
+            <button class="text-white hover:text-principal transition cursor-pointer text-lg"><i class="fa fa-search"></i></button>
+            <button class="text-white hover:text-principal transition cursor-pointer text-lg"><i class="fa fa-headphones"></i></button>
+            <button onclick="irParaCarrinho()" class="text-white hover:text-principal transition relative cursor-pointer text-lg">
+                <i class="fa fa-shopping-bag"></i>
+                <span id="qtdCarrinhoMovel" class="absolute -top-2 -right-2 bg-vermelho text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+            </button>
+            <!-- BOTÃO ENTRAR REMOVIDO AQUI -->
+        </div>
+    </div>
+</header>
+
+<!-- Conteúdo Principal -->
+<main class="flex-1 conteudo py-6">
+    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+        <i class="fa fa-gem text-principal"></i> Contas Custo-Benefício
+    </h2>
+
+    <div id="listaProdutos" class="grid grid-cols-2 gap-3 md:gap-4">
+        <!-- Produto 1 -->
+        <div class="produto bg-card rounded-xl overflow-hidden border border-gray-700 hover:border-principal/50 transition group">
+            <div class="relative overflow-hidden">
+                <img src="https://i.imgur.com/7X6W5vB.jpeg" alt="Conta" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 bg-vermelho text-white text-xs font-bold px-2 py-1 rounded">ESGOTADO</span>
+            </div>
+            <div class="p-3">
+                <h3 class="font-medium text-xs mb-2 line-clamp-2 h-8">✨🍎 2 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX</h3>
+                <div class="mb-2">
+                    <span class="text-gray-400 line-through text-[10px]">R$ 29,00</span>
+                    <div class="flex items-center gap-1">
+                        <span class="font-bold text-sm">R$ 11,99</span>
+                        <span class="text-verde text-[10px] font-medium">À vista no PIX</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="comprarProduto('✨🍎 2 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 11.99, 0, 'https://i.imgur.com/7X6W5vB.jpeg')" class="flex-1 bg-principal hover:bg-principal/80 transition py-1.5 rounded font-medium text-xs cursor-pointer">Comprar</button>
+                    <button onclick="comprarProduto('✨🍎 2 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 11.99, 0, 'https://i.imgur.com/7X6W5vB.jpeg')" class="w-9 h-9 flex items-center justify-center border border-gray-600 rounded hover:border-principal transition cursor-pointer">
+                        <i class="fa fa-shopping-bag text-sm"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] text-vermelho mt-1 font-medium">Estoque: Vazio</div>
+            </div>
+        </div>
+
+        <!-- Produto 2 (IMAGEM TROCADA CONFORME PEDIU) -->
+        <div class="produto bg-card rounded-xl overflow-hidden border border-gray-700 hover:border-principal/50 transition group">
+            <div class="relative overflow-hidden">
+                <img src="blox-frutas.png" alt="Conta" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 bg-vermelho text-white text-xs font-bold px-2 py-1 rounded">ESGOTADO</span>
+            </div>
+            <div class="p-3">
+                <h3 class="font-medium text-xs mb-2 line-clamp-2 h-8">🔥🍓 3-7 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX</h3>
+                <div class="mb-2">
+                    <span class="text-gray-400 line-through text-[10px]">R$ 40,00</span>
+                    <div class="flex items-center gap-1">
+                        <span class="font-bold text-sm">R$ 16,63</span>
+                        <span class="text-verde text-[10px] font-medium">À vista no PIX</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="comprarProduto('🔥🍓 3-7 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 16.63, 0, 'blox-frutas.png')" class="flex-1 bg-principal hover:bg-principal/80 transition py-1.5 rounded font-medium text-xs cursor-pointer">Comprar</button>
+                    <button onclick="comprarProduto('🔥🍓 3-7 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 16.63, 0, 'blox-frutas.png')" class="w-9 h-9 flex items-center justify-center border border-gray-600 rounded hover:border-principal transition cursor-pointer">
+                        <i class="fa fa-shopping-bag text-sm"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] text-vermelho mt-1 font-medium">Estoque: Vazio</div>
+            </div>
+        </div>
+
+        <!-- Produto 3 -->
+        <div class="produto bg-card rounded-xl overflow-hidden border border-gray-700 hover:border-principal/50 transition group">
+            <div class="relative overflow-hidden">
+                <img src="blox-frutas.png" alt="Conta" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 bg-verde text-white text-xs font-bold px-2 py-1 rounded">DISPONÍVEL</span>
+            </div>
+            <div class="p-3">
+                <h3 class="font-medium text-xs mb-2 line-clamp-2 h-8">✨🍏🍎🔷 4-6 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX</h3>
+                <div class="mb-2">
+                    <span class="text-gray-400 line-through text-[10px]">R$ 65,00</span>
+                    <div class="flex items-center gap-1">
+                        <span class="font-bold text-sm">R$ 27,09</span>
+                        <span class="text-verde text-[10px] font-medium">À vista no PIX</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="comprarProduto('✨🍏🍎🔷 4-6 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 27.09, 5, 'https://i.imgur.com/5T4S3zB.jpeg')" class="flex-1 bg-principal hover:bg-principal/80 transition py-1.5 rounded font-medium text-xs cursor-pointer">Comprar</button>
+                    <button onclick="comprarProduto('✨🍏🍎🔷 4-6 FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 27.09, 5, 'https://i.imgur.com/5T4S3zB.jpeg')" class="w-9 h-9 flex items-center justify-center border border-gray-600 rounded hover:border-principal transition cursor-pointer">
+                        <i class="fa fa-shopping-bag text-sm"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] text-verde mt-1 font-medium">Estoque: 5 disponíveis</div>
+            </div>
+        </div>
+
+        <!-- Produto 4 -->
+        <div class="produto bg-card rounded-xl overflow-hidden border border-gray-700 hover:border-principal//50 transition group">
+            <div class="relative overflow-hidden">
+                <img src="https://i.imgur.com/3R2Q1xW.jpeg" alt="Conta" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 bg-vermelho text-white text-xs font-bold px-2 py-1 rounded">ESGOTADO</span>
+            </div>
+            <div class="p-3">
+                <h3 class="font-medium text-xs mb-2 line-clamp-2 h-8">🍇🚨 7+ FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX</h3>
+                <div class="mb-2">
+                    <span class="text-gray-400 line-through text-[10px]">R$ 129,90</span>
+                    <div class="flex items-center gap-1">
+                        <span class="font-bold text-sm">R$ 38,90</span>
+                        <span class="text-verde text-[10px] font-medium">À vista no PIX</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="comprarProduto('🍇🚨 7+ FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 38.90, 0, 'https://i.imgur.com/3R2Q1xW.jpeg')" class="flex-1 bg-principal hover:bg-principal/80 transition py-1.5 rounded font-medium text-xs cursor-pointer">Comprar</button>
+                    <button onclick="comprarProduto('🍇🚨 7+ FRUTAS MÍTICAS + GODHUMAN + LEVEL MAX', 38.90, 0, 'https://i.imgur.com/3R2Q1xW.jpeg')" class="w-9 h-9 flex items-center justify-center border border-gray-600 rounded hover:border-principal transition cursor-pointer">
+                        <i class="fa fa-shopping-bag text-sm"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] text-vermelho mt-1 font-medium">Estoque: Vazio</div>
+            </div>
+        </div>
+
+        <!-- Produto 5 -->
+        <div class="produto bg-card rounded-xl overflow-hidden border border-gray-700 hover:border-principal/50 transition group">
+            <div class="relative overflow-hidden">
+                <img src="draco-contav4.png" alt="Conta V4 DRACO" class="w-full aspect-video object-cover group-hover:scale-105 transition duration-500">
+                <span class="absolute top-2 left-2 bg-vermelho text-white text-xs font-bold px-2 py-1 rounded">ESGOTADO</span>
+            </div>
+            <div class="p-3">
+                <h3 class="font-medium text-xs mb-2 line-clamp-2 h-8">⚡ Conta V4 DRACO</h3>
+                <div class="mb-2">
+                    <div class="flex items-center gap-1">
+                        <span class="font-bold text-sm">R$ 45,00</span>
+                        <span class="text-verde text-[10px] font-medium">À vista no PIX</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="comprarProduto('⚡ Conta V4 DRACO', 45.00, 0, 'draco-contav4.png')" class="flex-1 bg-principal hover:bg-principal/80 transition py-1.5 rounded font-medium text-xs cursor-pointer">Comprar</button>
+                    <button onclick="comprarProduto('⚡ Conta V4 DRACO', 45.00, 0, 'draco-contav4.png')" class="w-9 h-9 flex items-center justify-center border border-gray-600 rounded hover:border-principal transition cursor-pointer">
+                        <i class="fa fa-shopping-bag text-sm"></i>
+                    </button>
+                </div>
+                <div class="text-[10px] text-vermelho mt-1 font-medium">Estoque: Vazio</div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+function voltarInicio() {
+    window.location.href = 'index.html';
+}
+
+function comprarProduto(nome, preco, estoque, imagem) {
+    const produto = { nome, preco, estoque, imagem };
+    localStorage.setItem('produtoCarrinho', JSON.stringify(produto));
+    atualizarContador();
+    window.location.href = 'carrinho.html';
+}
+
+function irParaCarrinho() {
+    window.location.href = 'carrinho.html';
+}
+
+function atualizarContador() {
+    const produto = JSON.parse(localStorage.getItem('produtoCarrinho') || 'null');
+    const qtd = produto ? 1 : 0;
+    document.getElementById('qtdCarrinho').textContent = qtd;
+    document.getElementById('qtdCarrinhoMovel').textContent = qtd;
+}
+
+document.getElementById('buscarProduto').addEventListener('input', function() {
+    const termo = this.value.toLowerCase().trim();
+    const produtos = document.querySelectorAll('.produto');
+    produtos.forEach(prod => {
+        const nome = prod.querySelector('h3').textContent.toLowerCase();
+        prod.style.display = nome.includes(termo) ? 'block' : 'none';
+    });
+});
+
+window.addEventListener('DOMContentLoaded', atualizarContador);
+</script>
+
+</body>
+</html>
